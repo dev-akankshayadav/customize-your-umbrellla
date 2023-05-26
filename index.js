@@ -14,12 +14,20 @@ upload_btn.addEventListener("change", function () {
 
 const choose_color = document.querySelector(".color-btn");
 const image = document.querySelector("#img-div >img");
+const loading_icon = document.querySelector("#loading-icon");
 const load_button = document.querySelector(".icon-container");
 choose_color.addEventListener("click", function (e) {
   console.log(e.target);
   let color = e.target.id;
-  image.setAttribute("src", "img/loader_icon.svg");
+  load_button.setAttribute("visibility", "visible");
+  loading_icon.setAttribute("fill", `${color}`);
+  loading_icon.style.display = "block";
+  image.style.display = "none";
+  loading_icon.classList.add("spin");
   setTimeout(() => {
+    loading_icon.classList.remove("spin");
+    loading_icon.style.display = "none";
+    image.style.display = "block";
     load_button.style.backgroundColor = color;
     image.setAttribute("src", `img/${color}umbrella.png`);
   }, 1000);
